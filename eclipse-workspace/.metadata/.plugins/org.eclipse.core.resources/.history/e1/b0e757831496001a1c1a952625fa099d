@@ -1,0 +1,86 @@
+import javax.swing.JFrame;
+
+public class GUI {
+	
+  public GUI(){
+	  JFrame frame = new JFrame();
+	  JPanel panel = new JPanel();
+  }
+	
+  public static void main(String[] args) {
+	  
+	  new GUI();
+	  
+	  int numel;
+	  boolean search_sort;
+	  int searching;
+	  String type;
+	  
+	  numel = 10;
+	  search_sort = false;
+	  type = "Insertion";
+	  
+	  int[] holder = setarr(numel);
+	  for(int i = 0; i < numel; i++)
+	  {
+		  System.out.println(holder[i]);
+	  }
+	  System.out.println();
+	  if(search_sort)
+	  {
+		  searching = 11;
+		  holder[(int)Math.random() * numel] = searching;
+	  }
+	  else {
+		  searching = -1;
+	  }
+	  
+	  runsim(holder, search_sort, searching, type);
+	  
+	  for(int i = 0; i < numel; i++)
+	  {
+		  System.out.println(holder[i]);
+	  }
+  }
+  
+  public static int[] setarr(int size)
+  {
+	  int[] arr = new int[size];
+	  
+	  for (int i = 0; i < size; i++)
+	  {
+		  arr[i] = (int)(Math.random() * size * 4);
+	  }
+	  
+	  return arr;
+  }
+  
+  public static void runsim(int[] arr, boolean search_or_sort, int searching, String spec)
+  {
+	  if(search_or_sort)
+	  {
+		  
+	  }
+	  else {
+		  if(spec.contentEquals("Insertion"))
+		  {
+			  insertsort(arr);
+		  }
+	  }
+  }
+  
+  public static void insertsort(int arr[]) 
+  { 
+      int n = arr.length; 
+      for (int i = 1; i < n; ++i) { 
+          int key = arr[i]; 
+          int j = i - 1; 
+          while (j >= 0 && arr[j] > key) { 
+              arr[j + 1] = arr[j]; 
+              j = j - 1; 
+          } 
+          arr[j + 1] = key; 
+      } 
+  }
+  
+}

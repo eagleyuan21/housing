@@ -1,0 +1,13 @@
+class Main {
+	
+  public static void main(String[] args) {
+	  setup(43);
+  }
+  
+  public int[] setup(int size)
+  {
+	  int[] arr = new int[size];
+	  return arr;
+  }
+  
+}

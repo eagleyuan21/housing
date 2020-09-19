@@ -1,0 +1,23 @@
+import java.util.Random;
+
+class Main {
+	
+  public static void main(String[] args) {
+	  int[] holder = setup(7);
+	  for (int i = 0; i < holder.length; i++)
+	  {
+		  System.out.println(holder[i]);
+	  }
+  }
+  
+  public static int[] setup(int size)
+  {
+	  int[] arr = new int[size];
+	  for (int i = 0; i < size; i++)
+	  {
+		  arr[i] = (int)(Math.random() * size);
+	  }
+	  return arr;
+  }
+  
+}

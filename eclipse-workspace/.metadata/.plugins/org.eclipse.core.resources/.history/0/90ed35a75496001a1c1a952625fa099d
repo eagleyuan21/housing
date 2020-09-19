@@ -1,0 +1,203 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractAction;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+
+public class GUI implements ActionListener {
+	
+	private static JFrame frame;
+	private static JPanel panel;
+	
+	private static int numel;
+	private static boolean search_sort;
+	private static boolean asscend_dessend;
+	private static int searchval;
+	private static String type;
+	private static int[] disp;
+	private static String[] searchl = {};
+	private static String[] sortl = {"Insertion"};
+	
+	public GUI(){
+		
+	  frame = new JFrame();
+	  panel = new JPanel();
+	  frame.setSize(500,500);
+	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  
+	  frame.add(panel);
+	  panel.setLayout(null);
+	  
+	  JButton assc = new JButton(new AbstractAction("Asscending"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	            asscend_dessend = true;
+	        }
+	  });
+	  
+	  JButton dess = new JButton(new AbstractAction("Dessending"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	        	asscend_dessend = false;
+	        }
+	  });
+	  
+	  assc.setBounds(165, 10, 105, 25);
+	  panel.add(assc);
+	  dess.setBounds(165, 35, 105, 25);
+	  panel.add(dess);
+	  
+	  JComboBox algos = new JComboBox();
+	  algos.setBounds(270, 23, 110, 25);
+	  panel.add(algos);
+	  
+	  JButton search = new JButton(new AbstractAction("Search"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	            search_sort = true;
+
+	            algos.removeAllItems();
+
+	            for (String item : searchl) {
+	                algos.addItem(item);
+	            }
+	            
+	            assc.setVisible(false);;
+	            dess.setVisible(false);;
+
+	            // adding combobox to panel
+	            panel.add(algos);    
+	        }
+	  });
+	  
+	  JButton sort = new JButton(new AbstractAction("Sort"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	            search_sort = false;
+	            algos.removeAllItems();
+
+	            for (String item : sortl) {
+	                algos.addItem(item);
+	            }
+
+	            // adding combobox to panel
+	            panel.add(algos);   
+	        }
+	  });
+	  
+	  search.setBounds(5, 10, 80, 25);
+	  panel.add(search);
+	  sort.setBounds(80, 10, 80, 25);
+	  panel.add(sort);
+	  
+	  JLabel sizeask = new JLabel("Size of List: ");
+	  sizeask.setBounds(5, 35, 80, 25);
+	  panel.add(sizeask);	  
+	  JSlider sizeval = new JSlider(0, 15, 8);
+	  sizeval.setBounds(75, 35, 100, 25);
+	  sizeval.setMinorTickSpacing(1);
+	  sizeval.setMajorTickSpacing(3);
+	  sizeval.setPaintTicks(true);
+	  panel.add(sizeval);
+	  
+	  JButton setup = new JButton(new AbstractAction("Setup"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	        	numel = sizeval.getValue();
+	        	disp = setarr(numel);
+	        	type = algos.getSelectedItem().toString();
+	            for(int i = 0; i < numel; i++)
+	      	  	{
+	      		  System.out.println(disp[i]);
+	      	  	}
+	      	  	System.out.println();
+	        }
+	  });
+	  
+	  JButton run = new JButton(new AbstractAction("Run"){
+	        @Override
+	        public void actionPerformed( ActionEvent e ) {
+	            runsim(disp, search_sort, searchval, asscend_dessend, type);
+	            for(int i = 0; i < numel; i++)
+	      	  	{
+	      		  System.out.println(disp[i]);
+	      	  	}
+	        }
+	  });
+	  
+	  setup.setBounds(380, 10, 80, 25);
+	  panel.add(setup);
+	  run.setBounds(380, 35, 80, 25);
+	  panel.add(run);
+	  
+	  frame.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+	  
+	  new GUI();
+	  
+	}
+  
+	public static int[] setarr(int size)
+	{
+	  int[] arr = new int[size];
+	  
+	  for (int i = 0; i < size; i++)
+	  {
+		  arr[i] = (int)(Math.random() * size * 4);
+	  }
+	  
+	  return arr;
+	}
+  
+	public static void runsim(int[] arr, boolean search_or_sort, int searching, boolean assc_dess, String spec)
+	{
+	  if(search_or_sort)
+	  {
+		  
+	  }
+	  else {
+		  if(spec.equals("Insertion"))
+		  {
+			  insertsort(arr, assc_dess);
+		  }
+	  }
+	}
+  
+	public static void insertsort(int arr[], boolean order) 
+	{ 
+      int n = arr.length; 
+      for (int i = 1; i < n; ++i) { 
+          int key = arr[i]; 
+          int j = i - 1; 
+          
+          if(order)
+          {
+        	  while (j >= 0 && arr[j] > key) { 
+                  arr[j + 1] = arr[j]; 
+                  j = j - 1; 
+              } 
+          }
+          else {
+        	  while (j >= 0 && arr[j] < key) { 
+                  arr[j + 1] = arr[j]; 
+                  j = j - 1; 
+              } 
+          }
+          
+          arr[j + 1] = key; 
+      } 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}

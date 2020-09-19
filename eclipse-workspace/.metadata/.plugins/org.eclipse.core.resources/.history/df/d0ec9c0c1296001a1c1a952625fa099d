@@ -1,0 +1,40 @@
+class Main {
+	
+  public static void main(String[] args) {
+	  
+	  int numel;
+	  boolean search_sort;
+	  int searching;
+	  String type;
+	  
+	  numel = 7;
+	  search_sort = false;
+	  type = "Insertion";
+	  
+	  int[] holder = setarr(numel);
+	  
+	  if(search_sort)
+	  {
+		  searching = 11;
+		  holder[(int)Math.random() * numel] = searching;
+	  }
+	  else {
+		  searching = -1;
+	  }
+	  
+	  
+  }
+  
+  public static int[] setarr(int size)
+  {
+	  int[] arr = new int[size];
+	  
+	  for (int i = 0; i < size; i++)
+	  {
+		  arr[i] = (int)(Math.random() * size * 4);
+	  }
+	  
+	  return arr;
+  }
+  
+}

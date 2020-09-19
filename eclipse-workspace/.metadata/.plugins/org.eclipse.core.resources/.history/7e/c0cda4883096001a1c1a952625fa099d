@@ -1,0 +1,144 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+
+public class GUI implements ActionListener {
+
+	public GUI(){
+		
+	  JFrame frame = new JFrame();
+	  JPanel panel = new JPanel();
+	  frame.setSize(500,500);
+	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  
+	  frame.add(panel);
+	  panel.setLayout(null);
+	  
+	  JButton search = new JButton("Search");
+	  JButton sort = new JButton("Sort");
+	  search.setBounds(10, 15, 80, 25);
+	  panel.add(search);
+	  sort.setBounds(85, 15, 80, 25);
+	  panel.add(sort);
+	  search.addActionListener(this);
+	  sort.addActionListener(this);
+	  
+	  JLabel sizeask = new JLabel("Size of List: ");
+	  sizeask.setBounds(5, 50, 80, 25);
+	  panel.add(sizeask);
+	  
+	  JSlider sizeval = new JSlider(0, 15, 8);
+	  sizeval.setBounds(75, 50, 120, 25);
+	  sizeval.setMinorTickSpacing(1);
+	  sizeval.setMajorTickSpacing(3);
+	  sizeval.setPaintTicks(true);
+	  panel.add(sizeval);
+
+	  
+	  JComboBox algos = new JComboBox();
+	  
+	  frame.setVisible(true);
+	}
+	
+	public static void main(String[] args) {
+	  
+	  new GUI();
+	  
+	  int numel;
+	  boolean search_sort;
+	  boolean asscend_dessend;
+	  int searching;
+	  String type;
+	  
+	  numel = 10;
+	  search_sort = false;
+	  asscend_dessend = true;
+	  type = "Insertion";
+	  
+	  int[] holder = setarr(numel);
+	  for(int i = 0; i < numel; i++)
+	  {
+		  System.out.println(holder[i]);
+	  }
+	  System.out.println();
+	  if(search_sort)
+	  {
+		  searching = 11;
+		  holder[(int)Math.random() * numel] = searching;
+	  }
+	  else {
+		  searching = -1;
+	  }
+	  
+	  runsim(holder, search_sort, searching, asscend_dessend, type);
+	  
+	  for(int i = 0; i < numel; i++)
+	  {
+		  System.out.println(holder[i]);
+	  }
+	}
+  
+	public static int[] setarr(int size)
+	{
+	  int[] arr = new int[size];
+	  
+	  for (int i = 0; i < size; i++)
+	  {
+		  arr[i] = (int)(Math.random() * size * 4);
+	  }
+	  
+	  return arr;
+	}
+  
+	public static void runsim(int[] arr, boolean search_or_sort, int searching, boolean assc_dess, String spec)
+	{
+	  if(search_or_sort)
+	  {
+		  
+	  }
+	  else {
+		  if(spec.contentEquals("Insertion"))
+		  {
+			  insertsort(arr, assc_dess);
+		  }
+	  }
+	}
+  
+	public static void insertsort(int arr[], boolean order) 
+	{ 
+      int n = arr.length; 
+      for (int i = 1; i < n; ++i) { 
+          int key = arr[i]; 
+          int j = i - 1; 
+          if(order)
+          {
+        	  while (j >= 0 && arr[j] > key) { 
+                  arr[j + 1] = arr[j]; 
+                  j = j - 1; 
+              } 
+          }
+          else {
+        	  while (j >= 0 && arr[j] < key) { 
+                  arr[j + 1] = arr[j]; 
+                  j = j - 1; 
+              } 
+          }
+          
+          arr[j + 1] = key; 
+      } 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+  
+}
